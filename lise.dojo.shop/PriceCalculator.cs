@@ -1,6 +1,6 @@
 ﻿namespace lise.dojo.shop
 {
-    public class SampleClass
+    public class PriceCalculator
     {
     }
 }
