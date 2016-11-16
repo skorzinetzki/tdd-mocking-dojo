@@ -5,7 +5,7 @@ namespace lise.dojo.shop
 {
     public class PriceCalculator
     {
-        public double CalculateFee(double originalPrice, Currency cNY)
+        public double CalculateFee(double originalPrice, Currency currency)
         {
             return 0;
         }
