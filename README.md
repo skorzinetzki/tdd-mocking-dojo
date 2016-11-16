@@ -26,10 +26,23 @@ Use the *Test Driven Development* cycle:
 
 Therefore start by using the given `PriceCalculatorTest` class. Tip: Make usage of the `Currency` enum for determining, which currency is used to pay the bill. It is located in the `lise.dojo.shop.currency` dll, that is referenced by the solution.
 
+Helpful links for this task:
+* [NUnit Documentation](https://github.com/nunit/docs/wiki/NUnit-Documentation)
+* [FluentAssertions Documentation](https://github.com/dennisdoomen/fluentassertions/wiki)
+
 ## Task 2 - Currency Conversion PriceCalculation
 It is now time to calculate the price, the customer has to pay. As long as he wants to pay in his currency, we should convert the calculated price with fee to the correct currency. There are two alternative services, that provide conversion rates. Make our `PriceCalculator` depend on these services (you can choose one or maybe find a better solution). As long as we have no control of the results and availability of the services, your tests should not directly depend on them, but use mocks to fake their behavior.
 
-**Your task is to implement the extended business logic for currency conversion.** Keep on TDD'ing and additionally use the `Moq` library to fake the behavior.
+**Your task is to implement the extended business logic for currency conversion.** Keep on TDD'ing and additionally use the `Moq` library to fake the behavior. Remember, the provided converters are blackboxes for you. You can't predict their behavior.
+
+Helpful links for this task:
+* [NUnit Documentation](https://github.com/nunit/docs/wiki/NUnit-Documentation)
+* [FluentAssertions Documentation](https://github.com/dennisdoomen/fluentassertions/wiki)
+* [Moq Documentation](https://github.com/Moq/moq4/wiki/Quickstart)
+
+Used currency converters in `lise.dojo.shop.currency`:
+* [Currency Layer Currency Converter](https://currencylayer.com/) (REST API - needs access key, has limited free plan)
+* [KowaBunga Currency Converter](http://currencyconverter.kowabunga.net/converter.asmx) (SOAP API - free)
 
 ## Credits
 written by 
