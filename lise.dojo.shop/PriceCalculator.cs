@@ -45,6 +45,8 @@ namespace lise.dojo.shop
                 case Currency.CHF:
                 case Currency.DKK:
                     return 0;
+                case Currency.USD:
+                    return 8;
                 default:
                     return 10;
             }
