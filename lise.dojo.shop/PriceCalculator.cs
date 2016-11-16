@@ -40,6 +40,10 @@ namespace lise.dojo.shop
             {
                 return 0;
             }
+            else if (currency == Currency.CHF)
+            {
+                return 0;
+            }
             return 10;
         }
     }
