@@ -105,5 +105,16 @@ namespace lise.dojo.shop.tests
 
             Assert.AreEqual(noFee, minimumFee);
         }
+        [Test]
+        public void PriceCalculator_CalculateFee_USD_FeeAbove8Euro()
+        {
+            var priceCalculator = new PriceCalculator();
+            double originalPrice = 1000;
+
+            double expectedFee = originalPrice * 0.06;
+            double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.USD);
+
+            Assert.AreEqual(expectedFee, calculatedFee);
+        }
     }
 }
