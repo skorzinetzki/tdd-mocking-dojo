@@ -48,6 +48,8 @@ namespace lise.dojo.shop
                     return 0;
                 case Currency.USD:
                     return 8;
+                case Currency.CAD:
+                    return 9;
                 default:
                     return 10;
             }
