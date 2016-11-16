@@ -63,5 +63,16 @@ namespace lise.dojo.shop.tests
 
             Assert.AreEqual(noFee, minimumFee);
         }
+        [Test]
+        public void PriceCalculator_CalculateFee_CHF()
+        {
+            var priceCalculator = new PriceCalculator();
+            double originalPrice = 1000;
+
+            double expectedFee = originalPrice * 0.03;
+            double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.CHF);
+
+            Assert.AreEqual(expectedFee, calculatedFee);
+        }
     }
 }
