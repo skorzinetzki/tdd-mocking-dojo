@@ -36,15 +36,14 @@ namespace lise.dojo.shop
 
         public double GetMinimumFee(Currency currency)
         {
-            if(currency == Currency.GBP)
+            switch (currency)
             {
-                return 0;
+                case Currency.GBP:
+                case Currency.CHF:
+                    return 0;
+                default:
+                    return 10;
             }
-            else if (currency == Currency.CHF)
-            {
-                return 0;
-            }
-            return 10;
         }
     }
 }
