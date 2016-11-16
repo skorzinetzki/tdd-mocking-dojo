@@ -23,15 +23,15 @@ namespace lise.dojo.shop
 
         private double GetRate(Currency currency)
         {
-            if(currency == Currency.GBP)
+            switch (currency)
             {
-                return 0.05;
+                case Currency.GBP:
+                    return 0.05;
+                case Currency.CHF:
+                    return 0.03;
+                default:
+                    return 0.07;
             }
-            else if (currency == Currency.CHF)
-            {
-                return 0.03;
-            }
-            return 0.07;
         }
 
         public double GetMinimumFee(Currency currency)
