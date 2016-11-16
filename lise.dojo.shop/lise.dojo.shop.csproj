@@ -52,7 +52,7 @@
     <Compile Include="PriceCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="lise.dojo.shop.currency.dll.config" />
+    <None Include="CurrencyFees.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,11 +7,12 @@ namespace lise.dojo.shop
     {
         public double CalculateFee(double originalPrice, Currency currency)
         {
+            double defaultFee = 0.07;
             if(currency == Currency.EUR)
             {
                 return 0;
             }
-            return originalPrice * 0.07;
+            return originalPrice * defaultFee;
         }
     }
 }
