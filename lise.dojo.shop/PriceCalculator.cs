@@ -14,6 +14,10 @@ namespace lise.dojo.shop
             }
 
             double defaultRate = 0.07;
+            if (currency == Currency.GBP)
+            {
+                defaultRate = 0.05;
+            }
             double minimumFee = 10;
 
             double fee = originalPrice * defaultRate;
