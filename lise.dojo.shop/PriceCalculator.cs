@@ -7,25 +7,29 @@ namespace lise.dojo.shop
     {
         public double CalculateFee(double originalPrice, Currency currency)
         {
+            const double defaultRate = 0.07;
 
-            if(currency == Currency.EUR)
+            if (currency == Currency.EUR)
             {
                 return 0;
             }
+            double fee = originalPrice * GetRate(currency);
 
-            double defaultRate = 0.07;
-            if (currency == Currency.GBP)
-            {
-                defaultRate = 0.05;
-            }
             double minimumFee = 10;
-
-            double fee = originalPrice * defaultRate;
             if (fee < minimumFee)
             {
                 return minimumFee;
             }
             return fee;
+        }
+
+        private double GetRate(Currency currency)
+        {
+            if(currency == Currency.GBP)
+            {
+                return 0.05;
+            }
+            return 0.07;
         }
     }
 }
