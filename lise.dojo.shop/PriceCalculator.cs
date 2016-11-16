@@ -12,7 +12,12 @@ namespace lise.dojo.shop
             {
                 return 0;
             }
-            return originalPrice * defaultFee;
+            double fee = originalPrice * defaultFee;
+            if (fee < 10)
+            {
+                return 10;
+            }
+            return fee;
         }
     }
 }

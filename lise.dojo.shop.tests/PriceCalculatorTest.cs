@@ -22,7 +22,7 @@ namespace lise.dojo.shop.tests
         public void PriceCalculator_CalculateFee_Default_FeeAbove10Euro()
         {
             var priceCalculator = new PriceCalculator();
-            double originalPrice = 100;
+            double originalPrice = 1000;
 
             double expectedFee = originalPrice * 0.07;
             double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.CNY);
