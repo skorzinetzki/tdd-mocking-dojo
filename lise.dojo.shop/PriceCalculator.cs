@@ -29,6 +29,8 @@ namespace lise.dojo.shop
                     return 0.03;
                 case Currency.DKK:
                     return 0.04;
+                case Currency.USD:
+                    return 0.06;
                 default:
                     return 0.07;
             }
