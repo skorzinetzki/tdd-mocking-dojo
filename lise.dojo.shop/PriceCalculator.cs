@@ -34,7 +34,7 @@ namespace lise.dojo.shop
 
         public double GetMinimumFee(Currency gBP)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
