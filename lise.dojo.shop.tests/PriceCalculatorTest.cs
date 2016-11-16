@@ -24,7 +24,19 @@ namespace lise.dojo.shop.tests
             var priceCalculator = new PriceCalculator();
             double originalPrice = 100;
 
-            double expectedFee = originalPrice*0.07;
+            double expectedFee = originalPrice * 0.07;
+            double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.CNY);
+
+            Assert.AreEqual(expectedFee, calculatedFee);
+        }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_Default_FeeBelow10Euro()
+        {
+            var priceCalculator = new PriceCalculator();
+            double originalPrice = 100;
+
+            double expectedFee = 10;
             double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.CNY);
 
             Assert.AreEqual(expectedFee, calculatedFee);
