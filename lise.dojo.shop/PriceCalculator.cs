@@ -7,7 +7,7 @@ namespace lise.dojo.shop
     {
         public double CalculateFee(double originalPrice, Currency cNY)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
