@@ -95,5 +95,15 @@ namespace lise.dojo.shop.tests
 
             Assert.AreEqual(expectedFee, calculatedFee);
         }
+        [Test]
+        public void PriceCalculator_GetMinimumFee_DKK_HasNoMinimumFee()
+        {
+            var priceCalculator = new PriceCalculator();
+
+            double noFee = 0;
+            double minimumFee = priceCalculator.GetMinimumFee(Currency.DKK);
+
+            Assert.AreEqual(noFee, minimumFee);
+        }
     }
 }
