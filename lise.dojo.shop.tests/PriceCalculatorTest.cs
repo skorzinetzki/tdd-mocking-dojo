@@ -41,5 +41,17 @@ namespace lise.dojo.shop.tests
 
             Assert.AreEqual(expectedFee, calculatedFee);
         }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_GBP()
+        {
+            var priceCalculator = new PriceCalculator();
+            double originalPrice = 1000;
+
+            double expectedFee = originalPrice*0.05;
+            double calculatedFee = priceCalculator.CalculateFee(originalPrice, Currency.GBP);
+
+            Assert.AreEqual(expectedFee, calculatedFee);
+        }
     }
 }
