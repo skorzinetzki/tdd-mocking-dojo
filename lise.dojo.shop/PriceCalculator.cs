@@ -7,10 +7,6 @@ namespace lise.dojo.shop
     {
         public double CalculateFee(double originalPrice, Currency currency)
         {
-            if (currency == Currency.EUR)
-            {
-                return 0;
-            }
             double fee = originalPrice * GetRate(currency);
 
             double minimumFee = GetMinimumFee(currency);
@@ -25,6 +21,8 @@ namespace lise.dojo.shop
         {
             switch (currency)
             {
+                case Currency.EUR:
+                    return 0;
                 case Currency.GBP:
                     return 0.05;
                 case Currency.CHF:
@@ -40,6 +38,7 @@ namespace lise.dojo.shop
         {
             switch (currency)
             {
+                case Currency.EUR:
                 case Currency.GBP:
                 case Currency.CHF:
                 case Currency.DKK:
