@@ -89,7 +89,13 @@ namespace lise.dojo.shop
 
         public decimal CalculateFinalPrice(decimal price, Currency toCurrency)
         {
-            return price;
+            var fee = CalculateExtraFee(price, toCurrency);
+            var conversionRate = toCurrency == Currency.EUR ? 1 : RetrieveConversionRate(toCurrency);
+
+            var finalPrice = price + fee;
+            var convertedFinalePrice = finalPrice * conversionRate;
+
+            return convertedFinalePrice;
         }
     }
 }
