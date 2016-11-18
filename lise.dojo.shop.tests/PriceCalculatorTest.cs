@@ -138,7 +138,7 @@ namespace lise.dojo.shop.tests
         }
 
         [Test]
-        public void GetConversionRate_Chf_ShouldReturnExpectedRate()
+        public void RetrieveConversionRate_Chf_ShouldReturnExpectedRate()
         {
             // Arrange
             var toCurrency = Currency.CHF;
@@ -151,6 +151,22 @@ namespace lise.dojo.shop.tests
             // Assert
             rate.Should().Be(expectedRate);
             _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Once());
+        }
+
+        [Test]
+        public void RetrieveConversionRate_UnknownCurrency_ShouldCatchExceptionAndThrowItsOwn()
+        {
+            // Arrange
+            _currencyConverterMock.Setup(x => x.GetCurrentConversionRate(It.IsAny<Currency>()))
+                .Throws<CurrencyConversionException>();
+
+            // Act
+            Action action = () => _priceCalculator.RetrieveConversionRate(It.IsAny<Currency>());
+
+            // Assert
+            action.ShouldThrow<PriceCalculationException>()
+                .WithMessage("Could not retrieve currency conversion rate")
+                .WithInnerException<CurrencyConversionException>();
         }
 
         [Test]
