@@ -90,12 +90,17 @@ namespace lise.dojo.shop
         public decimal CalculateFinalPrice(decimal price, Currency toCurrency)
         {
             var fee = CalculateExtraFee(price, toCurrency);
-            var conversionRate = toCurrency == Currency.EUR ? 1 : RetrieveConversionRate(toCurrency);
+            var conversionRate = CalculateConversionRate(toCurrency);
 
             var finalPrice = price + fee;
-            var convertedFinalePrice = finalPrice * conversionRate;
+            var calculateFinalPrice = finalPrice * conversionRate;
 
-            return convertedFinalePrice;
+            return calculateFinalPrice;
+        }
+
+        private decimal CalculateConversionRate(Currency toCurrency)
+        {
+            return toCurrency == Currency.EUR ? 1 : RetrieveConversionRate(toCurrency);
         }
     }
 }
