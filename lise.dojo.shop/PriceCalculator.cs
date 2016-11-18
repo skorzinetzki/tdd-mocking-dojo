@@ -1,5 +1,4 @@
-﻿using System;
-using lise.dojo.shop.currency;
+﻿using lise.dojo.shop.currency;
 
 namespace lise.dojo.shop
 {
