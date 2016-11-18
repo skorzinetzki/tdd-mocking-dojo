@@ -89,7 +89,7 @@ namespace lise.dojo.shop
 
         public decimal CalculateFinalPrice(decimal price, Currency toCurrency)
         {
-            throw new System.NotImplementedException();
+            return price;
         }
     }
 }
