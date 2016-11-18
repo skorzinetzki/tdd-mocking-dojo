@@ -167,5 +167,23 @@ namespace lise.dojo.shop.tests
             finalPrice.Should().Be(price);
             _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Never());
         }
+
+        [Test]
+        public void CalculateFinalPrice_Chf_ShouldBe3PercentFee_ShouldBeWithExpectedRate()
+        {
+            // Arrange
+            var toCurrency = Currency.CHF;
+            var price = 100m;
+            var expectedRate = 1.05m;
+            var expectedFinalPrice = 108.15m;
+            _currencyConverterMock.Setup(x => x.GetCurrentConversionRate(toCurrency)).Returns(expectedRate);
+
+            // Act
+            decimal finalPrice = _priceCalculator.CalculateFinalPrice(price, Currency.CHF);
+
+            // Assert
+            finalPrice.Should().Be(expectedFinalPrice);
+            _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Once());
+        }
     }
 }
