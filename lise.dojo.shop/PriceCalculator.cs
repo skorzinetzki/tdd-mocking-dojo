@@ -1,4 +1,5 @@
-﻿using lise.dojo.shop.currency;
+﻿using System;
+using lise.dojo.shop.currency;
 
 namespace lise.dojo.shop
 {
@@ -84,7 +85,14 @@ namespace lise.dojo.shop
 
         public decimal RetrieveConversionRate(Currency toCurrency)
         {
-            return _currencyConverter.GetCurrentConversionRate(toCurrency);
+            try
+            {
+                return _currencyConverter.GetCurrentConversionRate(toCurrency);
+            }
+            catch (CurrencyConversionException exception)
+            {
+                throw new PriceCalculationException("Could not retrieve currency conversion rate", exception);
+            }
         }
 
         public decimal CalculateFinalPrice(decimal price, Currency toCurrency)
