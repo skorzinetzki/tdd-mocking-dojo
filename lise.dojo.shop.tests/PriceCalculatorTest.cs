@@ -13,7 +13,13 @@ namespace lise.dojo.shop.tests
         [SetUp]
         public void SetUp()
         {
-            _priceCalculator = new PriceCalculator();
+            var option = new CurrencyLayerCurrencyConverterOption()
+            {
+                AccessKey = "tbd"
+            };
+            var currencyLayerCurrencyConverter = new CurrencyLayerCurrencyConverter(option);
+
+            _priceCalculator = new PriceCalculator(currencyLayerCurrencyConverter);
         }
 
         [Test]

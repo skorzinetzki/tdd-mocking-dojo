@@ -23,6 +23,12 @@ namespace lise.dojo.shop
 
         private decimal _feePercentage;
         private decimal _minimumFee;
+        private readonly ICurrencyConverter _currencyConverter;
+
+        public PriceCalculator(ICurrencyConverter currencyConverter)
+        {
+            _currencyConverter = currencyConverter;
+        }
 
         public decimal CalculateExtraFee(decimal price, Currency toCurrency)
         {
@@ -78,7 +84,7 @@ namespace lise.dojo.shop
 
         public decimal RetrieveConversionRate(Currency toCurrency)
         {
-            throw new System.NotImplementedException();
+            return _currencyConverter.GetCurrentConversionRate(toCurrency);
         }
     }
 }
