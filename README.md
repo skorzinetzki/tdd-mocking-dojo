@@ -19,7 +19,7 @@ We charge a fee for every other country of 7%, but at least 10.00 EUR. There are
 * USD: 6%, minimum fee of 8.00 EUR (US Dollars)
 * CAD: 6%, minimum fee of 9.00 EUR (Canadian Dollars)
 
-Care about error cases like negative prices and nullable currency.
+If you have enough time, care about error cases like e.g. negative prices.
 
 **Your task is to implement the business logic for calculating the fee.** At this point, do not care about converting the price from EUR to the customer's currency.
 
