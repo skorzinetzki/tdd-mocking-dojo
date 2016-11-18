@@ -75,5 +75,10 @@ namespace lise.dojo.shop
                     break;
             }
         }
+
+        public decimal RetrieveConversionRate(Currency toCurrency)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

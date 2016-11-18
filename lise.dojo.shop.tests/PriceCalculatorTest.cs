@@ -133,5 +133,14 @@ namespace lise.dojo.shop.tests
 
             action.ShouldThrow<PriceCalculationException>().WithMessage("The price must not be negative!");
         }
+
+        [Test]
+        public void GetConversionRate_Chf_ShouldBeAvailable()
+        {
+            decimal rate = _priceCalculator.RetrieveConversionRate(Currency.CHF);
+
+            rate.Should().BePositive();
+            rate.Should().NotBe(1.0m);
+        }
     }
 }
