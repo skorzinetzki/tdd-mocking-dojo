@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using lise.dojo.shop.currency;
+using Moq;
 using NUnit.Framework;
 
 namespace lise.dojo.shop.tests
@@ -9,17 +10,13 @@ namespace lise.dojo.shop.tests
     public class PriceCalculatorTest
     {
         private PriceCalculator _priceCalculator;
+        private Mock<ICurrencyConverter> _currencyConverterMock;
 
         [SetUp]
         public void SetUp()
         {
-            var option = new CurrencyLayerCurrencyConverterOption()
-            {
-                AccessKey = "tbd"
-            };
-            var currencyLayerCurrencyConverter = new CurrencyLayerCurrencyConverter(option);
-
-            _priceCalculator = new PriceCalculator(currencyLayerCurrencyConverter);
+            _currencyConverterMock = new Mock<ICurrencyConverter>();
+            _priceCalculator = new PriceCalculator(_currencyConverterMock.Object);
         }
 
         [Test]
@@ -141,12 +138,19 @@ namespace lise.dojo.shop.tests
         }
 
         [Test]
-        public void GetConversionRate_Chf_ShouldBeAvailable()
+        public void GetConversionRate_Chf_ShouldReturnExpectedRate()
         {
-            decimal rate = _priceCalculator.RetrieveConversionRate(Currency.CHF);
+            // Arrange
+            var toCurrency = Currency.CHF;
+            var expectedRate = 1.05m;
+            _currencyConverterMock.Setup(x => x.GetCurrentConversionRate(toCurrency)).Returns(expectedRate);
 
-            rate.Should().BePositive();
-            rate.Should().NotBe(1.0m);
+            // Act
+            decimal rate = _priceCalculator.RetrieveConversionRate(toCurrency);
+
+            // Assert
+            rate.Should().Be(expectedRate);
+            _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Once());
         }
     }
 }
