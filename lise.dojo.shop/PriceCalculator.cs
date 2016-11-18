@@ -86,5 +86,10 @@ namespace lise.dojo.shop
         {
             return _currencyConverter.GetCurrentConversionRate(toCurrency);
         }
+
+        public decimal CalculateFinalPrice(decimal price, Currency toCurrency)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -152,5 +152,20 @@ namespace lise.dojo.shop.tests
             rate.Should().Be(expectedRate);
             _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Once());
         }
+
+        [Test]
+        public void CalculateFinalPrice_Eur_ShouldStayTheSame()
+        {
+            // Arrange
+            var toCurrency = Currency.EUR;
+            var price = 100m;
+
+            // Act
+            decimal finalPrice = _priceCalculator.CalculateFinalPrice(price, toCurrency);
+
+            // Assert
+            finalPrice.Should().Be(price);
+            _currencyConverterMock.Verify(x => x.GetCurrentConversionRate(toCurrency), Times.Never());
+        }
     }
 }
