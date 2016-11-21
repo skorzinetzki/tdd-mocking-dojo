@@ -9,7 +9,7 @@ namespace lise.dojo.shop
         {
             if(originalPrice < 0)
             {
-                throw new InvalidPriceException("price is negative: " + originalPrice);
+                throw new InvalidPriceException("originalPrice", originalPrice, "Price must not be negative for calculating a fee(currency=" + currency + ").");
             }
             double fee = originalPrice * GetRate(currency);
 

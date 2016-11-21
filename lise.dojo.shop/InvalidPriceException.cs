@@ -2,9 +2,9 @@
 
 namespace lise.dojo.shop
 {
-    public class InvalidPriceException : Exception
+    public class InvalidPriceException : ArgumentOutOfRangeException
     {
-        public InvalidPriceException(string message) : base(message)
+        public InvalidPriceException(string parameterName, Object price, string message) : base(parameterName, price, message)
         {
         }
     }
