@@ -7,6 +7,10 @@ namespace lise.dojo.shop
     {
         public double CalculateFee(double originalPrice, Currency currency)
         {
+            if(originalPrice < 0)
+            {
+                throw new InvalidPriceException("price is negative: " + originalPrice);
+            }
             double fee = originalPrice * GetRate(currency);
 
             double minimumFee = GetMinimumFee(currency);
