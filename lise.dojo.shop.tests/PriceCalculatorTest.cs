@@ -149,5 +149,13 @@ namespace lise.dojo.shop.tests
 
             Assert.AreEqual(expectedFee, calculatedFee);
         }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_ThrowsExceptionOnNegativePrices()
+        {
+            var priceCalculator = new PriceCalculator();
+            double negativePrice = -100;
+            Assert.Throws<InvalidPriceException>(() => priceCalculator.CalculateFee(negativePrice, Currency.CAD));
+        }
     }
 }
