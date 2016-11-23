@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using lise.dojo.shop.currency;
+using Moq;
 using NUnit.Framework;
 
 namespace lise.dojo.shop.tests
@@ -156,6 +157,25 @@ namespace lise.dojo.shop.tests
             var priceCalculator = PriceCalculator.GetPriceCalculator(Currency.CAD);
             double negativePrice = -100;
             Assert.Throws<InvalidPriceException>(() => priceCalculator.CalculateFee(negativePrice));
+        }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_UsesCurrentConversionRate()
+        {
+            decimal conversionRateEURtoCNY = 1.25m;
+            var currencyConverter = new Mock<ICurrencyConverter>();
+            currencyConverter.Setup(converter => converter.GetCurrentConversionRate(Currency.CNY)).Returns(conversionRateEURtoCNY);
+
+            var priceCalculator = PriceCalculator.GetPriceCalculator(Currency.CNY, currencyConverter.Object);
+            var priceCalculatorWithoutConversion = PriceCalculator.GetPriceCalculator(Currency.CNY);
+
+            var price = 20;
+            var feeInCNY = priceCalculator.CalculateFee(price);
+            var feeInEUR = priceCalculatorWithoutConversion.CalculateFee(price);
+
+            var feeInEURConvertedToCNY = feeInEUR * (double)conversionRateEURtoCNY;
+            Assert.AreEqual(feeInEURConvertedToCNY, feeInCNY, 0.005);
+
         }
     }
 }

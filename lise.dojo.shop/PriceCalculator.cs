@@ -57,5 +57,10 @@ namespace lise.dojo.shop
         {
             return _minimumFee;
         }
+
+        public static PriceCalculator GetPriceCalculator(Currency uSD, ICurrencyConverter currencyConverter)
+        {
+            return GetPriceCalculator(uSD);
+        }
     }
 }
