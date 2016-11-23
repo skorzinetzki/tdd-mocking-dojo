@@ -82,9 +82,22 @@ namespace lise.dojo.shop
             return _minimumFee;
         }
 
-        public double CalculateFee(int price, DateTime dateTime)
+        public double CalculateFee(int originalPrice, DateTime dateTime)
         {
-            return CalculateFee(price);
+            if (originalPrice < 0)
+            {
+                throw new InvalidPriceException("originalPrice", originalPrice, "Price must not be negative for calculating a fee(currency=" + _currencyToConvertTo + ").");
+            }
+            double feeInEUR = originalPrice * _rate;
+
+            if (feeInEUR < _minimumFee)
+            {
+                feeInEUR = _minimumFee;
+            }
+
+            double feeInCurrency = feeInEUR * (double)_currencyConverter.GetConversionRateByDate(_currencyToConvertTo, dateTime);
+
+            return feeInCurrency;
         }
     }
 }
