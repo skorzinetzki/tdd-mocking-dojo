@@ -59,30 +59,18 @@ namespace lise.dojo.shop
             }
         };
 
-        public double CalculateFee(double originalPrice)
-        {
-            if (originalPrice < 0)
-            {
-                throw new InvalidPriceException("originalPrice", originalPrice, "Price must not be negative for calculating a fee(currency=" + _currencyToConvertTo + ").");
-            }
-            double feeInEUR = originalPrice * _rate;
-
-            if (feeInEUR < _minimumFee)
-            {
-                feeInEUR = _minimumFee;
-            }
-
-            double feeInCurrency = feeInEUR * (double)_currencyConverter.GetCurrentConversionRate(_currencyToConvertTo);
-
-            return feeInCurrency;
-        }
-
         public double GetMinimumFee()
         {
             return _minimumFee;
         }
 
-        public double CalculateFee(int originalPrice, DateTime dateTime)
+        public double CalculateFee(double originalPrice)
+        {
+            double feeInCurrency = CalculateFeeinEUR(originalPrice) * (double)_currencyConverter.GetCurrentConversionRate(_currencyToConvertTo);
+
+            return feeInCurrency;
+        }
+        private double CalculateFeeinEUR(double originalPrice)
         {
             if (originalPrice < 0)
             {
@@ -95,7 +83,12 @@ namespace lise.dojo.shop
                 feeInEUR = _minimumFee;
             }
 
-            double feeInCurrency = feeInEUR * (double)_currencyConverter.GetConversionRateByDate(_currencyToConvertTo, dateTime);
+            return feeInEUR;
+        }
+
+        public double CalculateFee(int originalPrice, DateTime dateTime)
+        {
+            double feeInCurrency = CalculateFeeinEUR(originalPrice) * (double)_currencyConverter.GetConversionRateByDate(_currencyToConvertTo, dateTime);
 
             return feeInCurrency;
         }
