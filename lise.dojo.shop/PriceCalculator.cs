@@ -19,10 +19,33 @@ namespace lise.dojo.shop
             _currencyConverter = currencyConverter;
         }
 
+
         public static PriceCalculator GetPriceCalculator(Currency currencyToConvertTo)
         {
             return GetPriceCalculator(currencyToConvertTo, new NoCurrencyConversion());
         }
+
+        public static PriceCalculator GetPriceCalculator(Currency currencyToConvertTo, ICurrencyConverter currencyConverter)
+        {
+            switch (currencyToConvertTo)
+            {
+                case Currency.EUR:
+                    return new PriceCalculator(currencyToConvertTo, 0, 0, currencyConverter);
+                case Currency.GBP:
+                    return new PriceCalculator(currencyToConvertTo, 0.05, 0, currencyConverter);
+                case Currency.CHF:
+                    return new PriceCalculator(currencyToConvertTo, 0.03, 0, currencyConverter);
+                case Currency.DKK:
+                    return new PriceCalculator(currencyToConvertTo, 0.04, 0, currencyConverter);
+                case Currency.USD:
+                    return new PriceCalculator(currencyToConvertTo, 0.06, 8, currencyConverter);
+                case Currency.CAD:
+                    return new PriceCalculator(currencyToConvertTo, 0.06, 9, currencyConverter);
+                default:
+                    return new PriceCalculator(currencyToConvertTo, 0.07, 10, currencyConverter);
+            }
+        }
+
         private class NoCurrencyConversion : ICurrencyConverter
         {
             decimal ICurrencyConverter.GetConversionRateByDate(Currency toCurrency, DateTime dateTime)
@@ -57,27 +80,6 @@ namespace lise.dojo.shop
         public double GetMinimumFee()
         {
             return _minimumFee;
-        }
-
-        public static PriceCalculator GetPriceCalculator(Currency currencyToConvertTo, ICurrencyConverter currencyConverter)
-        {
-            switch (currencyToConvertTo)
-            {
-                case Currency.EUR:
-                    return new PriceCalculator(currencyToConvertTo, 0, 0, currencyConverter);
-                case Currency.GBP:
-                    return new PriceCalculator(currencyToConvertTo, 0.05, 0, currencyConverter);
-                case Currency.CHF:
-                    return new PriceCalculator(currencyToConvertTo, 0.03, 0, currencyConverter);
-                case Currency.DKK:
-                    return new PriceCalculator(currencyToConvertTo, 0.04, 0, currencyConverter);
-                case Currency.USD:
-                    return new PriceCalculator(currencyToConvertTo, 0.06, 8, currencyConverter);
-                case Currency.CAD:
-                    return new PriceCalculator(currencyToConvertTo, 0.06, 9, currencyConverter);
-                default:
-                    return new PriceCalculator(currencyToConvertTo, 0.07, 10, currencyConverter);
-            }
         }
     }
 }
