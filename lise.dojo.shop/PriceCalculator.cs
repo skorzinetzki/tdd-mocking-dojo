@@ -27,6 +27,10 @@ namespace lise.dojo.shop
 
         public static PriceCalculator GetPriceCalculator(Currency currencyToConvertTo, ICurrencyConverter currencyConverter)
         {
+            if(currencyConverter == null)
+            {
+                throw new ArgumentNullException("currencyConverter");
+            }
             switch (currencyToConvertTo)
             {
                 case Currency.EUR:
