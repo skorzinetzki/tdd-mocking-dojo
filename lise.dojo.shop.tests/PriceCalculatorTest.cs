@@ -213,5 +213,11 @@ namespace lise.dojo.shop.tests
             var price = 20;
             Assert.Throws<InvalidDateException>(() => priceCalculator.CalculateFee(price, tomorrow));
         }
+
+        [Test]
+        public void PriceCalculator_GetPriceCalculator_ThrowsExceptionOnNullConverter()
+        {
+            Assert.Throws<ArgumentNullException>(() => PriceCalculator.GetPriceCalculator(Currency.USD, null));
+        }
     }
 }
