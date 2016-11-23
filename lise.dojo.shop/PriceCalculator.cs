@@ -86,9 +86,13 @@ namespace lise.dojo.shop
             return feeInEUR;
         }
 
-        public double CalculateFee(int originalPrice, DateTime dateTime)
+        public double CalculateFee(int originalPrice, DateTime conversionDate)
         {
-            double feeInCurrency = CalculateFeeinEUR(originalPrice) * (double)_currencyConverter.GetConversionRateByDate(_currencyToConvertTo, dateTime);
+            if(conversionDate > DateTime.Now)
+            {
+                throw new InvalidDateException("conversionDate", conversionDate, "ConversionDate must not be in the Future");
+            }
+            double feeInCurrency = CalculateFeeinEUR(originalPrice) * (double)_currencyConverter.GetConversionRateByDate(_currencyToConvertTo, conversionDate);
 
             return feeInCurrency;
         }
