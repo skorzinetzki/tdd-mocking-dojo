@@ -2,6 +2,7 @@
 using lise.dojo.shop.currency;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace lise.dojo.shop.tests
 {
@@ -174,6 +175,28 @@ namespace lise.dojo.shop.tests
             var feeInEUR = priceCalculatorWithoutConversion.CalculateFee(price);
 
             var feeInEURConvertedToCNY = feeInEUR * (double)conversionRateEURtoCNY;
+            Assert.AreEqual(feeInEURConvertedToCNY, feeInCNY, 0.005);
+
+        }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_UsesConversionRateForSpecificDate()
+        {
+            var conversionRateEURtoCNY = 1.25m;
+            var conversionRateEURtoCNYOnMarchThird2016 = 1.1m;
+            var marchThird2016 = new DateTime(2016,3,3);
+            var currencyConverter = new Mock<ICurrencyConverter>();
+            currencyConverter.Setup(converter => converter.GetCurrentConversionRate(Currency.CNY)).Returns(conversionRateEURtoCNY);
+            currencyConverter.Setup(converter => converter.GetConversionRateByDate(Currency.CNY, marchThird2016)).Returns(conversionRateEURtoCNYOnMarchThird2016);
+
+            var priceCalculator = PriceCalculator.GetPriceCalculator(Currency.CNY, currencyConverter.Object);
+            var priceCalculatorWithoutConversion = PriceCalculator.GetPriceCalculator(Currency.CNY);
+
+            var price = 20;
+            var feeInCNY = priceCalculator.CalculateFee(price, marchThird2016);
+            var feeInEUR = priceCalculatorWithoutConversion.CalculateFee(price);
+
+            var feeInEURConvertedToCNY = feeInEUR * (double)conversionRateEURtoCNYOnMarchThird2016;
             Assert.AreEqual(feeInEURConvertedToCNY, feeInCNY, 0.005);
 
         }

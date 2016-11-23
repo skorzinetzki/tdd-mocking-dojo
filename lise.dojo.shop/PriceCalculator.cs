@@ -81,5 +81,10 @@ namespace lise.dojo.shop
         {
             return _minimumFee;
         }
+
+        public double CalculateFee(int price, DateTime dateTime)
+        {
+            return CalculateFee(price);
+        }
     }
 }
