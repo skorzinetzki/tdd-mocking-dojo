@@ -200,5 +200,18 @@ namespace lise.dojo.shop.tests
             Assert.AreEqual(feeInEURConvertedToCNY, feeInCNY, 0.005);
 
         }
+
+        [Test]
+        public void PriceCalculator_CalculateFee_ThrowsExceptionOnFutureDate()
+        {
+            var oneYearInTheFuture = DateTime.Now.AddYears(1);
+            var currencyConverter = new Mock<ICurrencyConverter>();
+            currencyConverter.Setup(converter => converter.GetConversionRateByDate(Currency.CNY, It.Is<DateTime>(dateTime => dateTime > DateTime.Now))).Throws(new CurrencyConversionException());
+
+            var priceCalculator = PriceCalculator.GetPriceCalculator(Currency.CNY, currencyConverter.Object);
+
+            var price = 20;
+            Assert.Throws<InvalidDateException>(() => priceCalculator.CalculateFee(price, oneYearInTheFuture));
+        }
     }
 }
