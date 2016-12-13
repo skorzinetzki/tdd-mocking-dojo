@@ -1,4 +1,6 @@
 # Shop TDD and Mocking Dojo
+![https://ci.appveyor.com/api/projects/status/github/skorzinetzki/tdd-mocking-dojo](https://ci.appveyor.com/api/projects/status/github/skorzinetzki/tdd-mocking-dojo)
+
 Hi and welcome to the Shop Dojo. This Dojo shows how to start Test Driven Development by using NUnit, Moq and FluentAssertions. To get off running, after checkout, do the following:
 
 * Open Solution in Visual Studio
